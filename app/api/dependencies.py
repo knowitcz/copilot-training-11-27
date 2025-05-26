@@ -5,10 +5,17 @@ from app.repository.account_repository import AccountRepository
 from app.services.account_service import AccountService
 from app.services.bank_service import OnlineBankService, TransferService
 from app.validator.amount_validator import AmountValidator, validate_positive_amount
+from app.repository.client_repository import ClientRepository
+from app.services.client_service import ClientService
 
 def get_account_service(session: Session = Depends(get_session)) -> AccountService:
     repo = AccountRepository(session)
     return AccountService(repo)
 
+def get_client_service(session: Session = Depends(get_session)) -> ClientService:
+    repo = ClientRepository(session)
+    return ClientService(repo)
+
 def get_transfer_service(account_service: AccountService = Depends(get_account_service)) -> TransferService:
-    return OnlineBankService(account_service, validate_positive_amount)
+    amount_validator: AmountValidator = validate_positive_amount
+    return OnlineBankService(account_service, amount_validator)
