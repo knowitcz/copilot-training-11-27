@@ -1,5 +1,5 @@
 ---
-mode: agent
+agent: agent
 ---
 Your task is to run a provided scenario of end-to-end test against a running instance of this project. Use locally running MCP tools to interact with the system. Before executing REST API calls, list all available endpoints to confirm the target endpoint exists.
 
