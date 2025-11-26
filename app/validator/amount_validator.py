@@ -7,3 +7,7 @@ class AmountValidator(Protocol):
 def validate_maximum_cash_amount(amount: int) -> None:
     if amount > 10000:
         raise ValueError("Amount cannot exceed 10000.")
+
+def validate_positive_amount(amount: int) -> None:
+    if amount <= 0:
+        raise ValueError("Amount must be positive.")
